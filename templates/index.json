@@ -55,7 +55,8 @@
         "column1": {
           "type": "column",
           "settings": {
-            "title": "Insert partner logo",
+            "image": "shopify://shop_images/Hinkley-logo-blk.svg",
+            "title": "",
             "text": "",
             "link_label": "",
             "link": ""

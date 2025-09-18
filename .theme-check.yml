@@ -1,0 +1,16 @@
+# .theme-check.yml
+# Configuration for Shopify Theme Check
+# Docs: https://shopify.dev/docs/themes/tools/theme-check/configuration
+
+# Rules: enable/disable specific checks (default is all enabled)
+# Example: disable unused_snippets if you don’t care about it
+# enabled_checks: all
+# disabled_checks:
+#   - UnusedSnippet
+
+# Ignore paths that shouldn’t be linted
+ignore:
+  - "node_modules/**"
+  - "dist/**"
+  - "build/**"
+  - "_old_theme/**"

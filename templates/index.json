@@ -63,7 +63,8 @@
         "logo_1": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/Hinkley-logo-blk.svg"
+            "image": "shopify://shop_images/Hinkley-logo-blk.svg",
+            "link": "/collections/hinkley-lighting"
           }
         },
         "logo_2": {

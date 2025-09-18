@@ -234,7 +234,8 @@
 
 /* Center partner logo images vertically */
 .multicolumn-card__image-wrapper .media {
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: center;
+  height: 100%;
 }

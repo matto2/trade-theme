@@ -1,12 +1,4 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
+
 {
   "sections": {
     "image_banner": {
@@ -45,7 +37,7 @@
       ],
       "settings": {
         "image": "shopify://shop_images/argo-v2_1600x600_166614bf-f952-4b1b-8b6b-792c7b2643cb.png",
-        "image_overlay_opacity": 40,
+        "image_overlay_opacity": 20,
         "image_height": "small",
         "image_behavior": "none",
         "desktop_content_position": "middle-left",

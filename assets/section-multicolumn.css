@@ -243,4 +243,8 @@
 .multicolumn-card__image-wrapper .media img {
   position: static !important;
   object-fit: contain;
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100%;
+  max-height: 100%;
 }

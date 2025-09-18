@@ -64,37 +64,42 @@
           "type": "logo",
           "settings": {
             "image": "shopify://shop_images/Hinkley-logo-blk.svg",
-            "link": "/collections/hinkley-lighting"
+            "link": ""
           }
         },
         "logo_2": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/generation-logo.svg"
+            "image": "shopify://shop_images/generation-logo.svg",
+            "link": ""
           }
         },
         "logo_3": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/feiss-logo.jpg"
+            "image": "shopify://shop_images/feiss-logo.jpg",
+            "link": ""
           }
         },
         "logo_4": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/Kichler_Lighting_Logo.png"
+            "image": "shopify://shop_images/Kichler_Lighting_Logo.png",
+            "link": ""
           }
         },
         "logo_5": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/Hinkley-logo-blk.svg"
+            "image": "shopify://shop_images/Hinkley-logo-blk.svg",
+            "link": ""
           }
         },
         "logo_6": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/Hinkley-logo-blk.svg"
+            "image": "shopify://shop_images/Hinkley-logo-blk.svg",
+            "link": ""
           }
         }
       },
@@ -166,7 +171,7 @@
         "featured_collection1": {
           "type": "featured_collection",
           "settings": {
-            "collection": ""
+            "collection": "hinkley-lighting"
           }
         },
         "featured_collection2": {

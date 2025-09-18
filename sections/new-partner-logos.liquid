@@ -6,7 +6,7 @@
   }
 
   .new-partner-logos-container {
-    max-width: 120rem;
+    max-width: var(--page-width);
     margin: 0 auto;
     padding: 0 1.5rem;
   }
@@ -14,7 +14,7 @@
   .new-partner-logos-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 2rem;
+    gap: 4rem;
     align-items: center;
   }
 
@@ -36,7 +36,7 @@
   @media screen and (max-width: 749px) {
     .new-partner-logos-grid {
       grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
+      gap: 3rem;
     }
 
     .new-partner-logo-item {
@@ -45,6 +45,12 @@
 
     .new-partner-logo-item img {
       max-height: 4rem;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    .new-partner-logos-container {
+      padding: 0 5rem;
     }
   }
 

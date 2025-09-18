@@ -69,7 +69,7 @@
         "logo_2": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/generation-logo"
+            "image": "shopify://shop_images/generation-logo.svg"
           }
         },
         "logo_3": {

@@ -73,7 +73,7 @@
         "column2": {
           "type": "column",
           "settings": {
-            "title": "Insert partner logo",
+            "title": "partner logo",
             "text": "",
             "link_label": "",
             "link": ""

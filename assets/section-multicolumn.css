@@ -235,17 +235,16 @@
 /* Center partner logo images vertically */
 .multicolumn-card__image-wrapper .media {
   display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .multicolumn-card__image-wrapper .media img {
-  position: relative !important;
-  top: auto !important;
-  left: auto !important;
-  transform: none !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
-  width: auto !important;
+  position: static !important;
+  object-fit: contain;
+  width: 100% !important;
   height: auto !important;
+  max-width: 100%;
+  max-height: 100%;
 }

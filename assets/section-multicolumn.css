@@ -239,3 +239,8 @@
   justify-content: center;
   height: 100%;
 }
+
+.multicolumn-card__image-wrapper .media img {
+  position: static !important;
+  object-fit: contain;
+}

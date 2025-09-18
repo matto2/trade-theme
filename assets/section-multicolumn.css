@@ -233,11 +233,18 @@
 }
 
 /* Partner logo styling - ensure logos are centered and properly sized */
-.multicolumn-card__image-wrapper .media {
+.multicolumn-card__image-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 80px;
+}
+
+.multicolumn-card__image-wrapper .media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .multicolumn-card__image {
@@ -246,6 +253,7 @@
   width: auto;
   height: auto;
   object-fit: contain;
+  display: block;
 }
 
 /* Ensure SVG logos maintain aspect ratio and fit within bounds */
@@ -254,11 +262,4 @@
   max-height: 60px;
   width: auto;
   height: auto;
-}
-
-/* Center the image container within the column */
-.multicolumn-card__image-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }

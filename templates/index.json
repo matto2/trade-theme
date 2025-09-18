@@ -60,20 +60,11 @@
     "multicolumn": {
       "type": "multicolumn",
       "blocks": {
-        "column1": {
+        "column2": {
           "type": "column",
           "settings": {
             "image": "shopify://shop_images/Hinkley-logo-blk.svg",
             "title": "",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column2": {
-          "type": "column",
-          "settings": {
-            "title": "partner logo",
             "text": "",
             "link_label": "",
             "link": ""
@@ -114,15 +105,24 @@
             "link_label": "",
             "link": ""
           }
+        },
+        "column_gggRpT": {
+          "type": "column",
+          "settings": {
+            "title": "Insert partner logo",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
         }
       },
       "block_order": [
-        "column1",
         "column2",
         "column3",
         "column4",
         "column5",
-        "column6"
+        "column6",
+        "column_gggRpT"
       ],
       "settings": {
         "title": "",

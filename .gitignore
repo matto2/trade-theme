@@ -1,0 +1,20 @@
+# Node/OS cruft
+node_modules/
+.DS_Store
+npm-debug.log*
+yarn.lock
+pnpm-lock.yaml
+
+# Archives & build outputs
+*.zip
+dist/
+build/
+
+# Shopify/store-specific
+config/settings_data.json
+.env
+*.local
+
+# Editor
+.vscode/
+.idea/

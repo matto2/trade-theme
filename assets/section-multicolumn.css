@@ -231,3 +231,34 @@
     display: list-item;
   }
 }
+
+/* Partner logo styling - ensure logos are centered and properly sized */
+.multicolumn-card__image-wrapper .media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+}
+
+.multicolumn-card__image {
+  max-width: 100%;
+  max-height: 60px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Ensure SVG logos maintain aspect ratio and fit within bounds */
+.multicolumn-card__image-wrapper svg {
+  max-width: 100%;
+  max-height: 60px;
+  width: auto;
+  height: auto;
+}
+
+/* Center the image container within the column */
+.multicolumn-card__image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

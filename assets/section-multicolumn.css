@@ -231,3 +231,10 @@
     display: list-item;
   }
 }
+
+/* Center partner logo images vertically */
+.multicolumn-card__image-wrapper .media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

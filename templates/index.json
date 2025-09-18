@@ -141,6 +141,58 @@
         "padding_bottom": 12
       }
     },
+    "hinkley_logos": {
+      "type": "new-partner-logos",
+      "blocks": {
+        "logo_1": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Hinkley-logo-blk.svg"
+          }
+        },
+        "logo_2": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Hinkley-logo-blk.svg"
+          }
+        },
+        "logo_3": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Hinkley-logo-blk.svg"
+          }
+        },
+        "logo_4": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Hinkley-logo-blk.svg"
+          }
+        },
+        "logo_5": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Hinkley-logo-blk.svg"
+          }
+        },
+        "logo_6": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Hinkley-logo-blk.svg"
+          }
+        }
+      },
+      "block_order": [
+        "logo_1",
+        "logo_2",
+        "logo_3",
+        "logo_4",
+        "logo_5",
+        "logo_6"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2"
+      }
+    },
     "multicolumn_FUVpXU": {
       "type": "multicolumn",
       "blocks": {
@@ -458,6 +510,7 @@
   "order": [
     "image_banner",
     "multicolumn",
+    "hinkley_logos",
     "multicolumn_FUVpXU",
     "rich_text",
     "featured_collection1",

@@ -1,0 +1,133 @@
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .new-partner-logos-section {
+    padding: 1.2rem 0;
+  }
+
+  .new-partner-logos-container {
+    max-width: 120rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .new-partner-logos-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .new-partner-logo-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 8rem;
+  }
+
+  .new-partner-logo-item img {
+    max-width: 100%;
+    max-height: 6rem;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  @media screen and (max-width: 749px) {
+    .new-partner-logos-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .new-partner-logo-item {
+      min-height: 6rem;
+    }
+
+    .new-partner-logo-item img {
+      max-height: 4rem;
+    }
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 989px) {
+    .new-partner-logos-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
+
+<div class="new-partner-logos-section color-{{ section.settings.color_scheme }}">
+  <div class="new-partner-logos-container">
+    <div class="new-partner-logos-grid">
+      {%- for block in section.blocks -%}
+        <div class="new-partner-logo-item" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <img
+              src="{{ block.settings.image | image_url: width: 300 }}"
+              alt="{{ block.settings.image.alt | escape }}"
+              width="{{ block.settings.image.width }}"
+              height="{{ block.settings.image.height }}"
+              loading="lazy"
+            >
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "New Partner Logos",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "New Partner Logos",
+      "blocks": [
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

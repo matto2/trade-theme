@@ -57,90 +57,6 @@
         "show_text_below": false
       }
     },
-    "multicolumn": {
-      "type": "multicolumn",
-      "blocks": {
-        "column2": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/Hinkley-logo-blk.svg",
-            "title": "",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column3": {
-          "type": "column",
-          "settings": {
-            "title": "Insert partner logo",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column4": {
-          "type": "column",
-          "settings": {
-            "title": "Insert partner logo",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column5": {
-          "type": "column",
-          "settings": {
-            "title": "Insert partner logo",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column6": {
-          "type": "column",
-          "settings": {
-            "title": "Insert partner logo",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_gggRpT": {
-          "type": "column",
-          "settings": {
-            "title": "Insert partner logo",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "column2",
-        "column3",
-        "column4",
-        "column5",
-        "column6",
-        "column_gggRpT"
-      ],
-      "settings": {
-        "title": "",
-        "heading_size": "h1",
-        "image_width": "full",
-        "image_ratio": "adapt",
-        "button_label": "",
-        "button_link": "",
-        "columns_desktop": 6,
-        "column_alignment": "center",
-        "background_style": "none",
-        "color_scheme": "scheme-2",
-        "columns_mobile": "2",
-        "swipe_on_mobile": true,
-        "padding_top": 12,
-        "padding_bottom": 12
-      }
-    },
     "hinkley_logos": {
       "type": "new-partner-logos",
       "blocks": {
@@ -191,61 +107,6 @@
       ],
       "settings": {
         "color_scheme": "scheme-2"
-      }
-    },
-    "multicolumn_FUVpXU": {
-      "type": "multicolumn",
-      "blocks": {
-        "column_NgJfwR": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/Hinkley-logo-blk.svg",
-            "title": "",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_hzPz9Y": {
-          "type": "column",
-          "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_ack9hJ": {
-          "type": "column",
-          "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "column_NgJfwR",
-        "column_hzPz9Y",
-        "column_ack9hJ"
-      ],
-      "name": "t:sections.multicolumn.presets.name",
-      "settings": {
-        "title": "Multicolumn",
-        "heading_size": "h1",
-        "image_width": "full",
-        "image_ratio": "adapt",
-        "button_label": "Button label",
-        "button_link": "",
-        "columns_desktop": 3,
-        "column_alignment": "left",
-        "background_style": "none",
-        "color_scheme": "scheme-2",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
       }
     },
     "rich_text": {
@@ -509,9 +370,7 @@
   },
   "order": [
     "image_banner",
-    "multicolumn",
     "hinkley_logos",
-    "multicolumn_FUVpXU",
     "rich_text",
     "featured_collection1",
     "collection_list",

@@ -141,74 +141,9 @@
                   {%- endform -%}
                 </div>
               {%- when 'inventory' -%}
-                <p
-                  class="product__inventory{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
-                  {{ block.shopify_attributes }}
-                  id="Inventory-{{ section.id }}"
-                  role="status"
-                >
-                  {%- if product.selected_or_first_available_variant.inventory_management == 'shopify' -%}
-                    {%- if product.selected_or_first_available_variant.inventory_quantity > 0 -%}
-                      {%- if product.selected_or_first_available_variant.inventory_quantity
-                          <= block.settings.inventory_threshold
-                      -%}
-                        <span class="svg-wrapper" style="color: rgb(238, 148, 65)">
-                          {{- 'icon-inventory-status.svg' | inline_asset_content -}}
-                        </span>
-                        {%- if block.settings.show_inventory_quantity -%}
-                          {{-
-                            'products.product.inventory_low_stock_show_count'
-                            | t: quantity: product.selected_or_first_available_variant.inventory_quantity
-                          -}}
-                        {%- else -%}
-                          {{- 'products.product.inventory_low_stock' | t -}}
-                        {%- endif -%}
-                      {%- else -%}
-                        <span class="svg-wrapper" style="color: rgb(62, 214, 96)">
-                          {{- 'icon-inventory-status.svg' | inline_asset_content -}}
-                        </span>
-                        {%- if block.settings.show_inventory_quantity -%}
-                          {{-
-                            'products.product.inventory_in_stock_show_count'
-                            | t: quantity: product.selected_or_first_available_variant.inventory_quantity
-                          -}}
-                        {%- else -%}
-                          {{- 'products.product.inventory_in_stock' | t -}}
-                        {%- endif -%}
-                      {%- endif -%}
-                    {%- else -%}
-                      {%- if product.selected_or_first_available_variant.inventory_policy == 'continue' -%}
-                        <span class="svg-wrapper" style="color: rgb(62, 214, 96)">
-                          {{- 'icon-inventory-status.svg' | inline_asset_content -}}
-                        </span>
-                        {{- 'products.product.inventory_out_of_stock_continue_selling' | t -}}
-                      {%- else -%}
-                        <span class="svg-wrapper" style="color: rgb(200, 200, 200)">
-                          {{- 'icon-inventory-status.svg' | inline_asset_content -}}
-                        </span>
-                        {{- 'products.product.inventory_out_of_stock' | t -}}
-                      {%- endif -%}
-                    {%- endif -%}
-                  {%- endif -%}
-                </p>
-
-                {% comment %} TOMIT Inventory Integration {% endcomment %}
-                {% unless product.selected_or_first_available_variant.inventory_management == null %}
-                  {% if template == "product" %}
-                    {% assign inventory = product.metafields.tomit_inventory %}
-                    {% if inventory.inventory_json.size > 0 %}
-                      <script>
-                        document.addEventListener('tomitLoaded', function(e) {
-                          tomitProductInventoryInfo.productJson = `{{inventory.inventory_json | json}}`;
-                        });
-                      </script>
-                    {% endif %}
-                  {% endif %}
-
-                  <div id="inventoryLocationInformation">
-                      <span class="inventoryLocationLoading"></span>
-                  </div>
-                {% endunless %}
+                {% render 'inventory-locations', product: product, current_variant: product.selected_or_first_available_variant, block: block %}
+              {%- when 'inventory_locations' -%}
+                {% render 'inventory-locations', product: product, current_variant: product.selected_or_first_available_variant, block: block %}
               {%- when 'description' -%}
                 {%- if product.description != blank -%}
                   <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
@@ -216,20 +151,9 @@
                   </div>
                 {%- endif -%}
               {%- when 'dimensions' -%}
-                {% comment %} Product dimensions from metafields {% endcomment %}
-                {% assign length = product.metafields.custom.length %}
-                {% assign width = product.metafields.custom.width %}
-                {% assign height = product.metafields.custom.height %}
-                {% assign weight = product.metafields.custom.weight %}
-                {% if length or width or height or weight %}
-                  <div class="product__dimensions" {{ block.shopify_attributes }}>
-                    <p class="dimensions">
-                      <span>
-                        BOX: {% if length %}{{ length }}{% endif %} {% if width %} x {{ width }}{% endif %} {% if height %} x {{ height }}{% endif %} {% if weight %}/ {{ weight }} {% endif %}
-                      </span>
-                    </p>
-                  </div>
-                {% endif %}
+                {% render 'product-dimensions', product: product, block: block %}
+              {%- when 'product_dimensions' -%}
+                {% render 'product-dimensions', product: product, block: block %}
               {%- when 'sku' -%}
                 <p
                   class="product__sku{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"
@@ -519,33 +443,7 @@
                   show_pickup_availability: true
                 -%}
               {%- when 'contact_form' -%}
-                <div class="product-contact-form" {{ block.shopify_attributes }}>
-                  <h3>{{ block.settings.heading | default: "Contact Us" }}</h3>
-                  <p>{{ block.settings.message | default: "Please contact us for pricing and availability." }}</p>
-
-                  {% comment %} Simple contact form {% endcomment %}
-                  <form action="/contact" method="post" class="contact-form">
-                    <div class="field">
-                      <input type="hidden" name="contact[subject]" value="Product Inquiry: {{ product.title }}">
-                      <label for="ContactName">Name *</label>
-                      <input type="text" name="contact[name]" id="ContactName" required>
-                    </div>
-
-                    <div class="field">
-                      <label for="ContactEmail">Email *</label>
-                      <input type="email" name="contact[email]" id="ContactEmail" required>
-                    </div>
-
-                    <div class="field">
-                      <label for="ContactMessage">Message</label>
-                      <textarea name="contact[body]" id="ContactMessage" rows="4">I'm interested in {{ product.title }}. Please provide pricing and availability information.</textarea>
-                    </div>
-
-                    <button type="submit" class="btn product-form__cart-submit">
-                      <span>{{ block.settings.button_text | default: "Send Inquiry" }}</span>
-                    </button>
-                  </form>
-                </div>
+                {% render 'contact-form', product: product, block: block, form_id: 'ProductContactForm-' | append: section.id %}
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
                   <div class="rating-wrapper">
@@ -1022,7 +920,106 @@
     {
       "type": "dimensions",
       "name": "Product Dimensions",
-      "limit": 1
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Section Heading",
+          "default": "Dimensions"
+        },
+        {
+          "type": "text",
+          "id": "custom_label",
+          "label": "Custom Label",
+          "default": "BOX",
+          "info": "Label shown before dimensions (e.g., BOX, SIZE, etc.)"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_individual_dimensions",
+          "label": "Show individual dimensions breakdown",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "product_dimensions",
+      "name": "Product Dimensions (Enhanced)",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Section Heading",
+          "default": "Product Specifications"
+        },
+        {
+          "type": "text",
+          "id": "custom_label",
+          "label": "Custom Label",
+          "default": "BOX",
+          "info": "Label shown before dimensions"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_individual_dimensions",
+          "label": "Show individual dimensions breakdown",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "inventory_locations",
+      "name": "Inventory & Locations (TOMIT)",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_exact_quantity",
+          "label": "Show exact quantities",
+          "default": false,
+          "info": "Display exact stock numbers when available"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_loading_message",
+          "label": "Show loading message",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "custom_in_stock_message",
+          "label": "In Stock Message",
+          "default": "We have [quantity] in stock.",
+          "info": "Use [quantity] to display the actual number"
+        },
+        {
+          "type": "text",
+          "id": "custom_available_message",
+          "label": "Available Message",
+          "default": "This product is available."
+        },
+        {
+          "type": "text",
+          "id": "custom_out_of_stock_message",
+          "label": "Out of Stock Message",
+          "default": "This product is currently out of stock."
+        },
+        {
+          "type": "text",
+          "id": "loading_message",
+          "label": "Loading Message",
+          "default": "Loading inventory information..."
+        },
+        {
+          "type": "textarea",
+          "id": "fallback_message",
+          "label": "Fallback Message",
+          "default": "Contact us for current inventory levels and availability.",
+          "info": "Shown if TOMIT data fails to load"
+        }
+      ]
     },
     {
       "type": "share",

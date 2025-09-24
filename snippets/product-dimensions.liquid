@@ -1,0 +1,96 @@
+{% comment %}
+  Renders product dimensions from custom metafields
+
+  Accepts:
+  - product: {Object} Product Liquid object (required)
+  - block: {Object} Block object with settings (optional)
+
+  Usage:
+  {% render 'product-dimensions', product: product, block: block %}
+{% endcomment %}
+
+{%- liquid
+  assign length = product.metafields.custom.length
+  assign width = product.metafields.custom.width
+  assign height = product.metafields.custom.height
+  assign weight = product.metafields.custom.weight
+-%}
+
+{% if length or width or height or weight %}
+  <div class="product__dimensions" {{ block.shopify_attributes | default: '' }}>
+    <div class="product__dimensions-content">
+      {% if block.settings.heading != blank %}
+        <h3 class="product__dimensions-heading">{{ block.settings.heading }}</h3>
+      {% endif %}
+
+      <div class="dimensions-info">
+        <span class="dimensions-label">
+          {% if block.settings.custom_label != blank %}
+            {{ block.settings.custom_label }}:
+          {% else %}
+            BOX:
+          {% endif %}
+
+          {% if length %}{{ length }}{% endif -%}
+          {%- if width %} x {{ width }}{% endif -%}
+          {%- if height %} x {{ height }}{% endif -%}
+          {%- if weight %} / {{ weight }}{% endif %}
+        </span>
+      </div>
+
+      {% if block.settings.show_individual_dimensions %}
+        <div class="dimensions-breakdown">
+          {% if length %}
+            <span class="dimension-item">Length: {{ length }}</span>
+          {% endif %}
+          {% if width %}
+            <span class="dimension-item">Width: {{ width }}</span>
+          {% endif %}
+          {% if height %}
+            <span class="dimension-item">Height: {{ height }}</span>
+          {% endif %}
+          {% if weight %}
+            <span class="dimension-item">Weight: {{ weight }}</span>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <style>
+    .product__dimensions {
+      margin: 1rem 0;
+      padding: 1rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      background: #f9f9f9;
+    }
+
+    .product__dimensions-heading {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.1em;
+      font-weight: 600;
+    }
+
+    .dimensions-info {
+      font-size: 0.95em;
+      color: #333;
+    }
+
+    .dimensions-breakdown {
+      margin-top: 0.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .dimension-item {
+      font-size: 0.85em;
+      color: #666;
+      background: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 3px;
+      border: 1px solid #ddd;
+    }
+  </style>
+{% endif %}

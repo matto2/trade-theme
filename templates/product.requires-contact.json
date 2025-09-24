@@ -18,18 +18,15 @@
           "settings": {
           }
         },
-        "inventory_locations": {
-          "type": "inventory_locations",
+        "inventory": {
+          "type": "inventory",
           "settings": {
-            "show_exact_quantity": false,
-            "show_loading_message": true
           }
         },
-        "product_dimensions": {
-          "type": "product_dimensions",
+        "dimensions": {
+          "type": "dimensions",
           "settings": {
-            "heading": "Product Specifications",
-            "show_individual_dimensions": true
+            "heading": "Product Specifications"
           }
         },
         "contact_form": {
@@ -78,8 +75,8 @@
         "title",
         "price",
         "description",
-        "inventory_locations",
-        "product_dimensions",
+        "inventory",
+        "dimensions",
         "contact_form",
         "collapsible-row-1",
         "collapsible-row-0",

@@ -651,6 +651,11 @@
                     </div>
                   </details>
                 </div>
+              {%- when 'test_block' -%}
+                <div class="test-block" {{ block.shopify_attributes }}>
+                  <h3>Test Block Working!</h3>
+                  <p>{{ block.settings.test_text }}</p>
+                </div>
             {%- endcase -%}
           {%- endfor -%}
           <a href="{{ product.url }}" class="link product__view-details animate-arrow">
@@ -2190,6 +2195,18 @@
           "default": "t:sections.main-product.blocks.icon_with_text.settings.heading_3.default",
           "label": "t:sections.main-product.blocks.icon_with_text.settings.heading_3.label",
           "info": "t:sections.main-product.blocks.icon_with_text.settings.heading.info"
+        }
+      ]
+    },
+    {
+      "type": "test_block",
+      "name": "Test Block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "test_text",
+          "label": "Test Text",
+          "default": "This is a test block"
         }
       ]
     }

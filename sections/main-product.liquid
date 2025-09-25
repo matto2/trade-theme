@@ -111,6 +111,21 @@
                   {% endif %}
                 </div>
 
+                {% comment %} Debug: Show available locations and their inventory {% endcomment %}
+                <div style="background: lightblue; padding: 10px; margin: 10px 0;">
+                  <strong>DEBUG - Location inventory data:</strong><br>
+                  {% assign current_variant = product.selected_or_first_available_variant %}
+                  Total locations: {{ shop.locations.size }}<br>
+                  {% for location in shop.locations %}
+                    Location: {{ location.name }} (ID: {{ location.id }})<br>
+                    {% assign location_inventory = current_variant.inventory_quantities[location.id] %}
+                    Stock: {{ location_inventory }}<br>
+                    ---<br>
+                  {% endfor %}
+
+                  Raw inventory_quantities: {{ current_variant.inventory_quantities | json }}<br>
+                </div>
+
                 {% comment %} Display inventory by location using Shopify locations {% endcomment %}
                 <div class="inventory-locations" style="margin-top: 10px; padding: 15px; background: #f8f9fa; border-radius: 4px;">
                   {% assign current_variant = product.selected_or_first_available_variant %}

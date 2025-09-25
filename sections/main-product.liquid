@@ -111,22 +111,23 @@
                   {% endif %}
                 </div>
 
-                {% comment %} TOMIT Warehouse Integration {% endcomment %}
-                {% unless product.selected_or_first_available_variant.inventory_management == null %}
-                  {% if template == "product" %}
-                    {% assign inventory = product.metafields.tomit_inventory %}
-                    {% if inventory.inventory_json.size > 0 %}
-                      <script>
-                        document.addEventListener('tomitLoaded', function(e) {
-                          tomitProductInventoryInfo.productJson = `{{inventory.inventory_json | json}}`;
-                        });
-                      </script>
-                    {% endif %}
-                  {% endif %}
-                  <div id="inventoryLocationInformation">
-                    <span class="inventoryLocationLoading"></span>
+                {% comment %} Display inventory by location using Shopify locations {% endcomment %}
+                <div class="inventory-locations" style="margin-top: 10px; padding: 15px; background: #f8f9fa; border-radius: 4px;">
+                  {% assign current_variant = product.selected_or_first_available_variant %}
+
+                  {% comment %} Show total grouped inventory first {% endcomment %}
+                  <div style="margin-bottom: 5px;">
+                    <strong>Grouped: {{ current_variant.inventory_quantity }}</strong>
                   </div>
-                {% endunless %}
+
+                  {% comment %} Show inventory by each location {% endcomment %}
+                  {% for location in shop.locations %}
+                    {% assign location_stock = current_variant.inventory_quantities[location.id] | default: 0 %}
+                    <div style="margin-bottom: 3px;">
+                      {{ location.name }}: {{ location_stock }}
+                    </div>
+                  {% endfor %}
+                </div>
 
               {%- when 'price' -%}
                 <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>

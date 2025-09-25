@@ -202,6 +202,50 @@
                       <span class="inventoryLocationLoading">Loading inventory information...</span>
                   </div>
                 {% endunless %}
+              {%- when 'inventory_locations' -%}
+                {%- if product.selected_or_first_available_variant.inventory_management == 'shopify' -%}
+                  <div class="product__inventory-locations" {{ block.shopify_attributes }}>
+                    {%- assign current_variant = product.selected_or_first_available_variant -%}
+                    {%- assign total_inventory = 0 -%}
+
+                    {%- comment -%} Calculate total inventory across all locations {%- endcomment -%}
+                    {%- for location in shop.enabled_locations -%}
+                      {%- assign location_inventory = current_variant.inventory_quantity_by_location[location.id] -%}
+                      {%- if location_inventory and location_inventory > 0 -%}
+                        {%- assign total_inventory = total_inventory | plus: location_inventory -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+
+                    <div class="inventory-summary">
+                      <span class="inventory-label">Stock Available:</span>
+                      {%- if total_inventory > 0 -%}
+                        <span class="inventory-total">Grouped: {{ total_inventory }}</span>
+                      {%- else -%}
+                        <span class="inventory-total">Grouped: 0</span>
+                      {%- endif -%}
+                    </div>
+
+                    {%- if block.settings.show_exact_quantity -%}
+                      <div class="inventory-locations">
+                        {%- for location in shop.enabled_locations -%}
+                          {%- assign location_inventory = current_variant.inventory_quantity_by_location[location.id] -%}
+                          {%- if location_inventory != nil -%}
+                            <span class="location-stock">
+                              {{ location.name }}: {{ location_inventory | default: 0 }}
+                            </span>
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </div>
+                    {%- endif -%}
+
+                    {%- comment -%} Show incoming inventory if available {%- endcomment -%}
+                    {%- if current_variant.incoming -%}
+                      <div class="inventory-incoming">
+                        <span class="incoming-stock">Incoming: {{ current_variant.incoming }}</span>
+                      </div>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
               {%- when 'description' -%}
                 {%- if product.description != blank -%}
                   <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>

@@ -100,6 +100,32 @@
                 <div class="product__title" {{ block.shopify_attributes }}>
                   <h1>{{ product.title | escape }}</h1>
                 </div>
+
+                {% comment %} Inventory tracking on product page {% endcomment %}
+                <div id="variant-inventory" class="{% unless current_variant.available %} hide {% endunless %}">
+                  {% if current_variant.inventory_management == "shopify" and current_variant.inventory_policy != "continue" %}
+                    We have {{ current_variant.inventory_quantity }} in stock.
+                  {% else %}
+                    This product is available.
+                  {% endif %}
+                </div>
+
+                {% unless product.selected_or_first_available_variant.inventory_management == null %}
+                  {% if template == "product" %}
+                    {% assign inventory = product.metafields.tomit_inventory %}
+                    {% if inventory.inventory_json.size > 0 %}
+                      <script>
+                        document.addEventListener('tomitLoaded', function(e) {
+                          tomitProductInventoryInfo.productJson = `{{inventory.inventory_json | json}}`;
+                        });
+                      </script>
+                    {% endif %}
+                  {% endif %}
+                  <div id="inventoryLocationInformation">
+                    <span class="inventoryLocationLoading"></span>
+                  </div>
+                {% endunless %}
+
               {%- when 'price' -%}
                 <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                   {%- render 'price',

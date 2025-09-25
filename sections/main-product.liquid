@@ -102,6 +102,14 @@
                 </div>
 
                 {% comment %} Inventory tracking on product page {% endcomment %}
+                <div style="background: yellow; padding: 10px; margin: 10px 0; border: 2px solid red;">
+                  <strong>DEBUG: Inventory section loaded</strong><br>
+                  Current variant: {{ current_variant.id }}<br>
+                  Available: {{ current_variant.available }}<br>
+                  Inventory management: {{ current_variant.inventory_management }}<br>
+                  Inventory quantity: {{ current_variant.inventory_quantity }}<br>
+                  Inventory policy: {{ current_variant.inventory_policy }}
+                </div>
                 <div id="variant-inventory" class="{% unless current_variant.available %} hide {% endunless %}">
                   {% if current_variant.inventory_management == "shopify" and current_variant.inventory_policy != "continue" %}
                     We have {{ current_variant.inventory_quantity }} in stock.
@@ -162,6 +170,13 @@
                   {%- endform -%}
                 </div>
               {%- when 'inventory' -%}
+                <div style="background: lightblue; padding: 10px; margin: 10px 0; border: 2px solid blue;">
+                  <strong>DEBUG: Inventory BLOCK loaded</strong><br>
+                  Block type: inventory<br>
+                  Selected variant: {{ product.selected_or_first_available_variant.id }}<br>
+                  Inventory management: {{ product.selected_or_first_available_variant.inventory_management }}<br>
+                  Inventory quantity: {{ product.selected_or_first_available_variant.inventory_quantity }}
+                </div>
                 <p
                   class="product__inventory{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
                   {{ block.shopify_attributes }}
@@ -229,6 +244,13 @@
                   </div>
                 {% endunless %}
               {%- when 'inventory_locations' -%}
+                <div style="background: lightgreen; padding: 10px; margin: 10px 0; border: 2px solid green;">
+                  <strong>DEBUG: Inventory LOCATIONS BLOCK loaded</strong><br>
+                  Block type: inventory_locations<br>
+                  Selected variant: {{ product.selected_or_first_available_variant.id }}<br>
+                  Inventory management: {{ product.selected_or_first_available_variant.inventory_management }}<br>
+                  Shop enabled locations count: {{ shop.enabled_locations.size }}
+                </div>
                 {%- if product.selected_or_first_available_variant.inventory_management == 'shopify' -%}
                   <div class="product__inventory-locations" {{ block.shopify_attributes }}>
                     {%- assign current_variant = product.selected_or_first_available_variant -%}

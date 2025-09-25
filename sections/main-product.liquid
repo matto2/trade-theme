@@ -103,13 +103,16 @@
 
                 {% comment %} Inventory tracking on product page {% endcomment %}
                 <div style="background: yellow; padding: 10px; margin: 10px 0; border: 2px solid red;">
-                  <strong>DEBUG: Inventory section loaded</strong><br>
-                  Current variant: {{ current_variant.id }}<br>
-                  Available: {{ current_variant.available }}<br>
-                  Inventory management: {{ current_variant.inventory_management }}<br>
-                  Inventory quantity: {{ current_variant.inventory_quantity }}<br>
-                  Inventory policy: {{ current_variant.inventory_policy }}
+                  <strong>DEBUG: Testing different variant references</strong><br>
+                  product.selected_or_first_available_variant.id: {{ product.selected_or_first_available_variant.id }}<br>
+                  product.first_available_variant.id: {{ product.first_available_variant.id }}<br>
+                  product.variants.first.id: {{ product.variants.first.id }}<br>
+                  Available: {{ product.selected_or_first_available_variant.available }}<br>
+                  Inventory quantity: {{ product.selected_or_first_available_variant.inventory_quantity }}<br>
+                  Inventory management: {{ product.selected_or_first_available_variant.inventory_management }}<br>
+                  Inventory policy: {{ product.selected_or_first_available_variant.inventory_policy }}
                 </div>
+                {% assign current_variant = product.selected_or_first_available_variant %}
                 <div id="variant-inventory" class="{% unless current_variant.available %} hide {% endunless %}">
                   {% if current_variant.inventory_management == "shopify" and current_variant.inventory_policy != "continue" %}
                     We have {{ current_variant.inventory_quantity }} in stock.

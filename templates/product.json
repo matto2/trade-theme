@@ -13,6 +13,12 @@
           "settings": {
           }
         },
+        "inventory_locations": {
+          "type": "inventory_locations",
+          "settings": {
+            "show_location_breakdown": true
+          }
+        },
         "description": {
           "type": "description",
           "settings": {
@@ -55,6 +61,7 @@
       "block_order": [
         "title",
         "price",
+        "inventory_locations",
         "description",
         "collapsible-row-1",
         "collapsible-row-0",

@@ -198,8 +198,14 @@
                       {% assign inventory = product.metafields.tomit_inventory %}
                       {% if inventory.inventory_json.size > 0 %}
                         <script>
-                          document.addEventListener('tomitLoaded', function(e) {
-                            tomitProductInventoryInfo.productJson = `{{inventory.inventory_json | json}}`;
+                          document.addEventListener('DOMContentLoaded', function() {
+                            if (typeof tomitProductInventoryInfo !== 'undefined') {
+                              tomitProductInventoryInfo.productJson = `{{inventory.inventory_json | json}}`;
+                            } else {
+                              document.addEventListener('tomitLoaded', function(e) {
+                                tomitProductInventoryInfo.productJson = `{{inventory.inventory_json | json}}`;
+                              });
+                            }
                           });
                         </script>
                       {% endif %}
@@ -207,7 +213,7 @@
 
                     {%- comment -%} Container for TOMIT to populate {%- endcomment -%}
                     <div id="inventoryLocationInformation">
-                      <span class="inventoryLocationLoading"></span>
+                      <span class="inventoryLocationLoading">Loading inventory information...</span>
                     </div>
                   </div>
                 {%- endunless -%}

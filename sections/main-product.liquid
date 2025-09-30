@@ -198,10 +198,12 @@
                       <div class="inventory-locations" style="padding: 0 15px;">
                         {%- for location in shop.locations -%}
                           {%- comment -%} Try to access location inventory via store_availability {%- endcomment -%}
-                          {%- assign location_stock = 0 -%}
+                          {%- assign location_available = false -%}
                           {%- for availability in current_variant.store_availabilities -%}
                             {%- if availability.location.id == location.id -%}
-                              {%- assign location_stock = availability.available ? 1 : 0 -%}
+                              {%- if availability.available -%}
+                                {%- assign location_available = true -%}
+                              {%- endif -%}
                             {%- endif -%}
                           {%- endfor -%}
 
@@ -209,7 +211,7 @@
                           <div class="location-item" style="margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid #e8e8e8; display: flex; justify-content: space-between;">
                             <span style="font-size: 14px;">{{ location.name }}:</span>
                             <span style="font-size: 14px; font-weight: 500;">
-                              {%- if location_stock > 0 -%}
+                              {%- if location_available -%}
                                 Available
                               {%- else -%}
                                 Contact us

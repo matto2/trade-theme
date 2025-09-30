@@ -136,6 +136,12 @@
                     {{ form | payment_terms }}
                   {%- endform -%}
                 </div>
+
+                {%- comment -%} GeoStock Inventory By Location integration {%- endcomment -%}
+                <div id="inventoryLocationInformation">
+                  <span class="inventoryLocationLoading"></span>
+                </div>
+
               {%- when 'inventory' -%}
                 <p
                   class="product__inventory{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
@@ -180,43 +186,7 @@
                   {%- endif -%}
                 </p>
               {%- when 'inventory_locations' -%}
-                {%- unless product.selected_or_first_available_variant.inventory_management == null -%}
-                  <div class="product__inventory-locations" {{ block.shopify_attributes }}>
-                    {%- assign current_variant = product.selected_or_first_available_variant -%}
-
-                    {%- comment -%} Basic inventory message {%- endcomment -%}
-                    <div id="variant-inventory" class="{% unless current_variant.available %} hide {% endunless %}" style="margin-bottom: 10px;">
-                      {% if current_variant.inventory_management == "shopify" and current_variant.inventory_policy != "continue" %}
-                        We have {{ current_variant.inventory_quantity }} in stock.
-                      {% else %}
-                        This product is available.
-                      {% endif %}
-                    </div>
-
-                    {%- comment -%} TOMIT Integration for detailed warehouse inventory {%- endcomment -%}
-                    {% if template == "product" %}
-                      {% assign inventory = product.metafields.tomit_inventory %}
-                      {% if inventory.inventory_json.size > 0 %}
-                        <script>
-                          document.addEventListener('DOMContentLoaded', function() {
-                            if (typeof tomitProductInventoryInfo !== 'undefined') {
-                              tomitProductInventoryInfo.productJson = `{{inventory.inventory_json | json}}`;
-                            } else {
-                              document.addEventListener('tomitLoaded', function(e) {
-                                tomitProductInventoryInfo.productJson = `{{inventory.inventory_json | json}}`;
-                              });
-                            }
-                          });
-                        </script>
-                      {% endif %}
-                    {% endif %}
-
-                    {%- comment -%} Container for TOMIT to populate {%- endcomment -%}
-                    <div id="inventoryLocationInformation">
-                      <span class="inventoryLocationLoading">Loading inventory information...</span>
-                    </div>
-                  </div>
-                {%- endunless -%}
+                {%- comment -%} This block is deprecated - GeoStock container is now in the price block {%- endcomment -%}
               {%- when 'description' -%}
                 {%- if product.description != blank -%}
                   <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>

@@ -3,7 +3,8 @@
     "allow": [
       "Bash(git add:*)",
       "Bash(git push:*)",
-      "WebFetch(domain:shopify.dev)"
+      "WebFetch(domain:shopify.dev)",
+      "Bash(curl -s \"https://nliaustralia.com.au/products/allis-1l-pendant-6507401-112\")"
     ],
     "deny": [],
     "ask": []

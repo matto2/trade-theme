@@ -180,49 +180,37 @@
                   {%- endif -%}
                 </p>
               {%- when 'inventory_locations' -%}
-                {%- if product.selected_or_first_available_variant.inventory_management == 'shopify' -%}
+                {%- unless product.selected_or_first_available_variant.inventory_management == null -%}
                   <div class="product__inventory-locations" {{ block.shopify_attributes }}>
                     {%- assign current_variant = product.selected_or_first_available_variant -%}
 
-                    {%- comment -%} Show total inventory {%- endcomment -%}
-                    <div class="inventory-summary" style="padding: 12px 15px; background-color: #f8f9fa; border-radius: 4px; margin-bottom: 15px;">
-                      {%- if current_variant.inventory_quantity > 0 -%}
-                        <div style="font-weight: 600; font-size: 15px;">Grouped: {{ current_variant.inventory_quantity }}</div>
-                      {%- else -%}
-                        <div style="font-weight: 600; font-size: 15px; color: #999;">Out of Stock</div>
-                      {%- endif -%}
+                    {%- comment -%} Basic inventory message {%- endcomment -%}
+                    <div id="variant-inventory" class="{% unless current_variant.available %} hide {% endunless %}" style="margin-bottom: 10px;">
+                      {% if current_variant.inventory_management == "shopify" and current_variant.inventory_policy != "continue" %}
+                        We have {{ current_variant.inventory_quantity }} in stock.
+                      {% else %}
+                        This product is available.
+                      {% endif %}
                     </div>
 
-                    {%- comment -%} Show inventory by warehouse location {%- endcomment -%}
-                    {%- if block.settings.show_location_breakdown -%}
-                      <div class="inventory-locations" style="padding: 0 15px;">
-                        {%- for location in shop.locations -%}
-                          {%- comment -%} Try to access location inventory via store_availability {%- endcomment -%}
-                          {%- assign location_available = false -%}
-                          {%- for availability in current_variant.store_availabilities -%}
-                            {%- if availability.location.id == location.id -%}
-                              {%- if availability.available -%}
-                                {%- assign location_available = true -%}
-                              {%- endif -%}
-                            {%- endif -%}
-                          {%- endfor -%}
+                    {%- comment -%} TOMIT Integration for detailed warehouse inventory {%- endcomment -%}
+                    {% if template == "product" %}
+                      {% assign inventory = product.metafields.tomit_inventory %}
+                      {% if inventory.inventory_json.size > 0 %}
+                        <script>
+                          document.addEventListener('tomitLoaded', function(e) {
+                            tomitProductInventoryInfo.productJson = `{{inventory.inventory_json | json}}`;
+                          });
+                        </script>
+                      {% endif %}
+                    {% endif %}
 
-                          {%- comment -%} Display each location {%- endcomment -%}
-                          <div class="location-item" style="margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid #e8e8e8; display: flex; justify-content: space-between;">
-                            <span style="font-size: 14px;">{{ location.name }}:</span>
-                            <span style="font-size: 14px; font-weight: 500;">
-                              {%- if location_available -%}
-                                Available
-                              {%- else -%}
-                                Contact us
-                              {%- endif -%}
-                            </span>
-                          </div>
-                        {%- endfor -%}
-                      </div>
-                    {%- endif -%}
+                    {%- comment -%} Container for TOMIT to populate {%- endcomment -%}
+                    <div id="inventoryLocationInformation">
+                      <span class="inventoryLocationLoading"></span>
+                    </div>
                   </div>
-                {%- endif -%}
+                {%- endunless -%}
               {%- when 'description' -%}
                 {%- if product.description != blank -%}
                   <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
